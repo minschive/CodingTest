@@ -1,39 +1,41 @@
-import java.util.Scanner;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.StringTokenizer;
 
 public class Main {
-
-	public static void main(String[] args) {
-		Scanner sc = new Scanner(System.in);
-		int N = sc.nextInt();
-		int K = sc.nextInt();
+	
+	static int N, K, index;
+	
+	public static void main(String[] args) throws Exception {
+		BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
+		StringTokenizer st = new StringTokenizer(br.readLine());
 		
-		int[] arr = new int[N];
+		N = Integer.parseInt(st.nextToken());
+		K = Integer.parseInt(st.nextToken());
 		
-		for(int i = 0; i < N; i++) {
-			arr[i] = i + 1;
+		List<Integer> list = new ArrayList<>();
+		for(int i = 1; i <= N; i++) {
+			list.add(i);
 		}
 		
-		int index = 0;
-		int cnt = N;
+		index = 0;
 		
 		System.out.print("<");
 		
-		for(int i = 0; i < N; i++) {
-			index = (index + K - 1) % cnt;
+		while(!list.isEmpty()) {
+			index = (index + K - 1) % list.size();
 			
-			if(i == N - 1) {
-				System.out.print(arr[index]);
+			if(list.size() == 1) {
+				System.out.print(list.get(index));
 			} else {
-				System.out.print(arr[index] + ", ");
+				System.out.print(list.get(index) + ", ");
 			}
 			
-			for(int j = index; j < cnt - 1; j++) {
-				arr[j] = arr[j + 1];
-			}
-			cnt--;
+			list.remove(index);
 		}
 		
 		System.out.print(">");
 	}
-
 }
