@@ -18,6 +18,7 @@ class Solution {
         		break;
         	}
         }
-        return goalDeque.isEmpty() ? "Yes" : "No";
+        if(goalDeque.isEmpty()) return "Yes";
+		else  return "No";
     }
 }
