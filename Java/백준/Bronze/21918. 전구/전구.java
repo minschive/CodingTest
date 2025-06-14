@@ -1,69 +1,67 @@
-import java.util.*;
-import java.io.*;
+import java.io.BufferedReader;
+import java.io.InputStreamReader;
+import java.util.StringTokenizer;
 
 public class Main {
 
-    static int[] state;
+    static int[] arr;
 
-    public static void main(String[] args) throws IOException {
-
+    public static void main(String[] args) throws Exception {
         BufferedReader br = new BufferedReader(new InputStreamReader(System.in));
-        StringTokenizer st;
-        int stnum = 0;
-        int l = 0;
-        int r = 0;
+        StringTokenizer st = new StringTokenizer(br.readLine());
 
-        st = new StringTokenizer(br.readLine(), " ");
-        int num = Integer.parseInt(st.nextToken());
-        int round = Integer.parseInt(st.nextToken());
-        
-        state = new int[num+1];
+        int N = Integer.parseInt(st.nextToken());
+        int M = Integer.parseInt(st.nextToken());
 
-        st = new StringTokenizer(br.readLine(), " ");
-        for(int i = 1; i <= num; i++) {
-            state[i] = Integer.parseInt(st.nextToken());
+        arr = new int[N + 1];
+
+        st = new StringTokenizer(br.readLine());
+        for(int i = 1; i <= N; i++) {
+            arr[i] = Integer.parseInt(st.nextToken());
         }
 
-        for(int i = 0; i < round; i++) {
-            st = new StringTokenizer(br.readLine(), " ");
-            stnum = Integer.parseInt(st.nextToken());
-            l = Integer.parseInt(st.nextToken());
-            r = Integer.parseInt(st.nextToken());
-            find(stnum, l, r);
+        int a, b, c = 0;
+
+        for(int i = 0; i < M; i++) {
+            st = new StringTokenizer(br.readLine());
+            a = Integer.parseInt(st.nextToken());
+            b = Integer.parseInt(st.nextToken());
+            c = Integer.parseInt(st.nextToken());
+
+            find(a, b, c);
         }
 
-        for(int i = 1; i <= num; i++) {
-            System.out.printf("%d ", state[i]);
+        for(int i = 1; i <= N; i++) {
+            System.out.printf("%d ", arr[i]);
         }
+
     }
 
-    static void find(int stnum, int l, int r) {
-        if(stnum == 1) {
-            state[l] = r;
+    static void find(int a, int b, int c) {
+        if(a == 1) {
+            arr[b] = c;
         }
 
-        else if(stnum == 2) {
-            for(int i = l; i <= r; i++) {
-                if(state[i] == 0){
-                    state[i] = 1;
+        else if(a == 2) {
+            for(int i = b; i <= c; i++) {
+                if(arr[i] == 0) {
+                    arr[i] = 1;
+                } else {
+                    arr[i] = 0;
                 }
-                else {
-                    state[i] = 0;
-                }
             }
         }
 
-        else if(stnum == 3) {
-            for(int i = l; i <= r; i++) {
-                state[i] = 0;
+        else if(a == 3) {
+            for(int i = b; i <= c; i++) {
+                arr[i] = 0;
             }
         }
 
-        else if(stnum == 4) {
-            for(int i = l; i <= r; i++) {
-                state[i] = 1;
+        else if(a == 4) {
+            for(int i = b; i <= c; i++) {
+                arr[i] = 1;
             }
         }
-
     }
 }
